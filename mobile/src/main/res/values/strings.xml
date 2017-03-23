@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Attendance Management</string>
+    <string name="loading">Loading</string>
+    <string name="failure_ws">Failure</string>
 </resources>
