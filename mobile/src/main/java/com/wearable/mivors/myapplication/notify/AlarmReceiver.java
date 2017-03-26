@@ -48,7 +48,8 @@ try {
 
         Notification notification = builder.setContentTitle("Please, Check for any pending attendance approvals")
                 .setSmallIcon(R.mipmap.ic_launcher)
-
+                .setAutoCancel(true)
+                .setSound(alarmSound)
                 .setContentIntent(contentIntent)
                 .build();
 

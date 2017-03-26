@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.wearable.mivors.myapplication.controller.StoreData;
+import com.wearable.mivors.myapplication.controller.Utility;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -28,6 +29,9 @@ public class SplashScreen extends AppCompatActivity {
                 public void run() {
                     // This method will be executed once the timer is over
                     // Start your app main activity
+                    Utility utility;
+                    utility = new Utility(SplashScreen.this);
+                    utility.startAtTime();
                     Intent i = new Intent(SplashScreen.this, LoginActivity.class);
                     startActivity(i);
                     new StoreData(SplashScreen.this).setSplash(5);

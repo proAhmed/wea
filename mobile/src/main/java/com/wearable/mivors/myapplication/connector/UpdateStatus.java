@@ -38,7 +38,7 @@ public class UpdateStatus extends AsyncTask<MangerModel, Void, String> {
 		this.onLoadingComplete = onLoadingComplete;
 		this.context = context;
 		URL = URL+id;
-		Log.d("iiiuuuppp",URL);
+		Log.d("oookkiii",URL);
 	}
 	//////// update status by id ,subject,status
 

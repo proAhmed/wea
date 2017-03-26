@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
     static final Integer WRITE_EXST = 0x3;
 
     int poss = 0;
-
+    UserAdapter userAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
         arrayListString = new ArrayList<>();
         utility = new Utility();
         utility = new Utility(this);
-        utility.startAtTime();
-        askForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXST);
+         askForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXST);
 
         onUserClick = this;
         try {
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
                                 new StoreData(MainActivity.this).setUserId(arrayList.get(0).getPrimaryId());
                                 Log.d("pppp", utility.formatDate(arrayList).size() + "   //  " + arrayList.get(poss).getCreated());
                                 if (utility.formatDate(arrayList).size() > 0) {
-                                    UserAdapter userAdapter = new UserAdapter(MainActivity.this, utility.formatDate(arrayList), onUserClick);
+                                   UserAdapter   userAdapter = new UserAdapter(MainActivity.this, utility.formatDate(arrayList), onUserClick);
                                     recycle.setAdapter(userAdapter);
                                     userAdapter.notifyDataSetChanged();
                                 } else {
@@ -128,9 +127,10 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
     public void reject(int pos) {
         try {
             if (Utility.isNetworkConnected(MainActivity.this)) {
-                Toast.makeText(MainActivity.this, "Rejected", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Rejected", Toast.LENGTH_SHORT).show();
                 int primaryId = utility.formatDate(arrayList).get(pos).getPrimaryId();
                 new UpdateStatus(MainActivity.this, onLoadingComplete, utility.formatDate(arrayList).get(pos).getId()).execute(new MangerModel(primaryId, 1));
+               // removeAt(pos);
             }
         } catch (Exception e) {
             Log.d("eeeooo", e.toString());
@@ -140,13 +140,15 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
 
     @Override
     public void accept(int pos) {
+               try {
+                   if (Utility.isNetworkConnected(MainActivity.this)) {
+                       Toast.makeText(MainActivity.this, "Approved", Toast.LENGTH_SHORT).show();
+                       int primaryId = utility.formatDate(arrayList).get(pos).getPrimaryId();
+                       new UpdateStatus(MainActivity.this, onLoadingComplete, utility.formatDate(arrayList).get(pos).getId()).execute(new MangerModel(primaryId, 2));
+                    }
+               }catch (Exception e){
 
-            if (Utility.isNetworkConnected(MainActivity.this)) {
-                Toast.makeText(MainActivity.this, "Approved", Toast.LENGTH_LONG).show();
-                int primaryId = utility.formatDate(arrayList).get(pos).getPrimaryId();
-                new UpdateStatus(MainActivity.this, onLoadingComplete, utility.formatDate(arrayList).get(pos).getId()).execute(new MangerModel(primaryId, 2));
-            }
-
+               }
         poss = poss + 1;
     }
 
