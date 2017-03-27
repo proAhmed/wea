@@ -168,7 +168,7 @@ public class UserAdapter extends RecyclerView
             @Override
             public void onClick(View view) {
                 onUserClick.accept(position);
-                 removeAt(position);
+                removeAt(position);
 
             }
         });
@@ -177,7 +177,7 @@ public class UserAdapter extends RecyclerView
             @Override
             public void onClick(View view) {
                 onUserClick.reject(position);
-                 removeAt(position);
+                removeAt(position);
             }
         });
 
@@ -195,15 +195,11 @@ public class UserAdapter extends RecyclerView
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, mDataset.size());
         }catch (Exception e){
-            Log.d("eeeeee",e.toString());
             try {
                 mDataset.remove(position-1);
-
                 notifyItemRemoved(position-1);
-                notifyItemRangeChanged(position-1, mDataset.size()-1);
+                notifyItemRangeChanged(position-1, mDataset.size());
             }catch (Exception ee){
-                Log.d("eeeeee",ee.toString());
-                mDataset.removeAll(mDataset);
 
             }
         }

@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recycle.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
-        arrayListString = new ArrayList<>();
-        utility = new Utility();
+         utility = new Utility();
         utility = new Utility(this);
          askForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXST);
 
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
                                 new StoreData(MainActivity.this).setUserId(arrayList.get(0).getPrimaryId());
                                 Log.d("pppp", utility.formatDate(arrayList).size() + "   //  " + arrayList.get(poss).getCreated());
                                 if (utility.formatDate(arrayList).size() > 0) {
-                                   UserAdapter   userAdapter = new UserAdapter(MainActivity.this, utility.formatDate(arrayList), onUserClick);
+                                      userAdapter = new UserAdapter(MainActivity.this, utility.formatDate(arrayList), onUserClick);
                                     recycle.setAdapter(userAdapter);
                                     userAdapter.notifyDataSetChanged();
                                 } else {
@@ -126,12 +125,15 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
     @Override
     public void reject(int pos) {
         try {
+            Log.d("eeeooopp", ""+pos);
             if (Utility.isNetworkConnected(MainActivity.this)) {
                 Toast.makeText(MainActivity.this, "Rejected", Toast.LENGTH_SHORT).show();
-                int primaryId = utility.formatDate(arrayList).get(pos).getPrimaryId();
-                new UpdateStatus(MainActivity.this, onLoadingComplete, utility.formatDate(arrayList).get(pos).getId()).execute(new MangerModel(primaryId, 1));
-               // removeAt(pos);
-            }
+                int primaryId = utility.formatDate(arrayList).get(poss).getPrimaryId();
+                new UpdateStatus(MainActivity.this, onLoadingComplete, utility.formatDate(arrayList).get(poss).getId()).execute(new MangerModel(primaryId, 1));
+                utility.formatDate(arrayList).remove(pos);
+                userAdapter.notifyDataSetChanged();
+
+         }
         } catch (Exception e) {
             Log.d("eeeooo", e.toString());
         }
@@ -143,9 +145,9 @@ public class MainActivity extends AppCompatActivity implements OnUserClick {
                try {
                    if (Utility.isNetworkConnected(MainActivity.this)) {
                        Toast.makeText(MainActivity.this, "Approved", Toast.LENGTH_SHORT).show();
-                       int primaryId = utility.formatDate(arrayList).get(pos).getPrimaryId();
-                       new UpdateStatus(MainActivity.this, onLoadingComplete, utility.formatDate(arrayList).get(pos).getId()).execute(new MangerModel(primaryId, 2));
-                    }
+                       int primaryId = utility.formatDate(arrayList).get(poss).getPrimaryId();
+                       new UpdateStatus(MainActivity.this, onLoadingComplete, utility.formatDate(arrayList).get(poss).getId()).execute(new MangerModel(primaryId, 2));
+                   }
                }catch (Exception e){
 
                }

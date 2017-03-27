@@ -38,7 +38,7 @@ public class UpdateStatus extends AsyncTask<MangerModel, Void, String> {
 		this.onLoadingComplete = onLoadingComplete;
 		this.context = context;
 		URL = URL+id;
-		Log.d("oookkiii",URL);
+		Log.d("eeeoookkiii",URL);
 	}
 	//////// update status by id ,subject,status
 
@@ -59,12 +59,12 @@ public class UpdateStatus extends AsyncTask<MangerModel, Void, String> {
 
 		try {
 			responseJSON = makeRequest(params[0]);
-			Log.d("ooovvv",responseJSON);
+			Log.d("eeeooovvv",responseJSON);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.d("ooo11",e.toString());
+			Log.d("eeeooo11",e.toString());
 		}
 
 		Gson gson = new Gson();
@@ -123,7 +123,7 @@ public class UpdateStatus extends AsyncTask<MangerModel, Void, String> {
 
 		json.put("primaryContact",primaryContact);
 		json.put("statusWithType",statusWithType);
-		Log.d("oookk",json.toString());
+		Log.d("eeeoookk",json.toString());
 
 		InputStreamEntity entity = null;
 		try {
